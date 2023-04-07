@@ -1,37 +1,32 @@
-const express = require('express');
-const router = express.Router();
+const bcrypt = require('bcryptjs');
+const User = require('../models/user.model');
 
-const isLoggedIn = (req, res, next) => {
-  if (!req.isAuthenticated()) {
-    return res.redirect('/user/no-permission');
+exports.register = async (req, res) => {
+try {
+  const { login, password } = req.body;
+  if (
+    login &&
+    typeof login === 'string' &&
+    password &&
+    typeof password === 'string'
+  ) {
+    const userWithLogin = await User.findOne({ login });
+    if (userWithLogin) {
+      return res
+        .status(409)
+        .send({ message: 'User with this login already exists' });
+    }
+    const user = await User.create({
+      login,
+      password: await bcrypt.hash(password, 10),
+    });
+    res.status(201).send({ message: 'User created ' + user.login });
   } else {
-    next();
+    res.status(400).send({ message: 'Bad request' });
   }
+} catch (err) {
+  res.status(500).send({ message: err.message });
+}
 };
 
-router.get('/logged', isLoggedIn, (req, res) => {
-  res.render('logged', {
-    user: req.user.displayName,
-    avatar: req.user.photos[0].value,
-  });
-});
-
-router.get('/no-permission', (req, res) => {
-  res.render('noPermission');
-});
-
-
-router.get('/profile', isLoggedIn, (req, res) => {
-  res.render('profile');
-});
-
-router.get('/profile/settings', isLoggedIn, (req, res) => {
-  res.render('profileSettings');
-});
-
-router.get('/logout', (req, res) => {
-  res.render('logout');
-});
-
-
-module.exports = router;
+exports.login = async (req, res) => {};
