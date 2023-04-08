@@ -6,7 +6,7 @@ const session = require('express-session');
 const passportSetup = require('./config/passport');
 
 const app = express();
-
+require('dotenv').config()
 
 // init session mechanism
 app.use(session({ secret: 'anything' }));
