@@ -12,8 +12,8 @@ require('dotenv').config()
 app.use(session({ secret: 'anything' }));
 
 // init passport
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // standard middleware
 app.use(cors());
