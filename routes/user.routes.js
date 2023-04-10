@@ -1,5 +1,8 @@
+const express = require('express');
+const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/user.model');
+
 
 exports.register = async (req, res) => {
 try {
@@ -30,3 +33,5 @@ try {
 };
 
 exports.login = async (req, res) => {};
+
+module.exports = router;
