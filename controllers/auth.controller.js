@@ -3,12 +3,14 @@ const User = require('../models/user.model');
 
 exports.register = async (req, res) => {
   try {
-    const { login, password } = req.body;
+    const { login, password, phoneNumber } = req.body;
     if (
       login &&
       typeof login === 'string' &&
       password &&
-      typeof password === 'string'
+      typeof password === 'string' &&
+      phoneNumber &&
+      typeof phoneNumber === 'string'
     ) {
       const userWithLogin = await User.findOne({ login });
       if (userWithLogin) {
@@ -19,6 +21,7 @@ exports.register = async (req, res) => {
       const user = await User.create({
         login,
         password: await bcrypt.hash(password, 10),
+        phoneNumber
       });
       res.status(201).send({ message: 'User created ' + user.login });
     } else {
@@ -58,10 +61,24 @@ exports.login = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-  // if (req.session.login) {
-  //   res.send({ login: req.session.login });
-  // } else {
-  //   res.status(401).send({ message: 'You are not authorized!' });
-  // }
   res.send('Im logged!');
+};
+
+exports.logout = async (req, res) => {
+  try {
+    req.session.destroy();
+    res.send('Bye Bye');
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+exports.getUserByLogin = async (req, res) => {
+  try {
+    const user = await User.findOne({ login: req.params.login });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
