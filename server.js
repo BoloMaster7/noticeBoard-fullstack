@@ -46,7 +46,7 @@ app.get('*', (req, res) => {
 
 app.use('/auth', require('./routes/auth.routes'));
 app.use('/user', require('./routes/user.routes'));
-// app.use('/ads', require('./routes/ads.routes')); dlaczego wyrzuca blad?
+app.use('/ads', require('./routes/ads.routes')); 
 
 app.set('veiw engine', 'ejs')
 
