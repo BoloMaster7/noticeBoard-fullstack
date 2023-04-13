@@ -40,19 +40,20 @@ app.use(session({
 app.use(express.static(path.join(__dirname, '/client/build')));
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'));
-});
 
 app.use('/auth', require('./routes/auth.routes'));
 app.use('/user', require('./routes/user.routes'));
 app.use('/ads', require('./routes/ads.routes')); 
 
-app.set('veiw engine', 'ejs')
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
 
 app.use((req, res) => {
   res.status(404).render('notFound');
 });
+
 
 app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running...');
