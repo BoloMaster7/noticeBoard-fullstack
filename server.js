@@ -18,7 +18,14 @@ app.use(session({ secret: 'anything' }));
 // app.use(passport.session());
 
 // standard middleware
-app.use(cors());
+if (process.env.NODE_ENV !== 'production') {
+  app.use(
+    cors({
+      origin: ['http://localhost:3000'],
+      credentials: true,
+    })
+  );
+}
 app.use(express.json());
 app.use( session({
     secret: process.env.SECRET,
