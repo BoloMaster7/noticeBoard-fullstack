@@ -27,23 +27,26 @@ if (process.env.NODE_ENV !== 'production') {
   );
 }
 app.use(express.json());
-app.use( session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: process.env.NODE_ENV === 'production',
-    }, })
-    );
-    
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+  },
+})
+);
 
-app.get('/', (req, res) => {
-  res.render('index');
+app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname, '/public')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
 app.use('/auth', require('./routes/auth.routes'));
 app.use('/user', require('./routes/user.routes'));
-// app.use('/adverts', require('./routes/adverts.routes'));
+// app.use('/ads', require('./routes/ads.routes')); dlaczego wyrzuca blad?
 
 app.set('veiw engine', 'ejs')
 
@@ -51,6 +54,6 @@ app.use((req, res) => {
   res.status(404).render('notFound');
 });
 
-app.listen('8000', () => {
-  console.log('Server is running on port: 8000');
+app.listen(process.env.PORT || 8000, () => {
+  console.log('Server is running...');
 });
