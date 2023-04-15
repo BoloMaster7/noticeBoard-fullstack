@@ -1,10 +1,12 @@
+const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user.model');
 const getImageFileType = require('../utils/getImageFileType');
 
 exports.register = async (req, res) => {
   try {
-    const { login, password, phoneNumber } = req.body;
+    const { login, password, avatar, phoneNumber } = req.body;
+
     const fileType = req.file ? await getImageFileType(req.file) : 'unknown';
     if (
       login &&
@@ -14,14 +16,19 @@ exports.register = async (req, res) => {
       phoneNumber &&
       typeof phoneNumber === 'string' &&
       req.file &&
-      ['image.png', 'image.jpeg', 'image.gif'].includes(fileType)
+      ['image/png', 'image/jpeg', 'image/gif'].includes(fileType)
     ) {
       const userWithLogin = await User.findOne({ login });
+
       if (userWithLogin) {
-        return res
-          .status(409)
-          .send({ message: 'User with this login already exists' });
+        return (
+          fs.unlinkSync(`./client/public/uploads/${req.file.filename}`),
+          res
+            .status(409)
+            .send({ message: 'User with this login already exists' })
+        );
       }
+
       const user = await User.create({
         login,
         password: await bcrypt.hash(password, 10),
@@ -30,6 +37,9 @@ exports.register = async (req, res) => {
       });
       res.status(201).send({ message: 'User created ' + user.login });
     } else {
+      if (req.file) {
+        fs.unlinkSync(`./client/public/uploads/${req.file.filename}`);
+      }
       res.status(400).send({ message: 'Bad request' });
     }
   } catch (err) {
@@ -51,10 +61,7 @@ exports.login = async (req, res) => {
         res.status(400).send({ message: 'Login or password are incorrect' });
       } else {
         if (bcrypt.compareSync(password, user.password)) {
-          req.session.user = {
-            login: user.login,
-            id: user.id,
-          };
+          req.session.login = user;
           res.status(200).send({ message: 'Login successful' });
         } else {
           res.status(400).send({ message: 'Login or password are incorrect' });
@@ -69,7 +76,11 @@ exports.login = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-  res.send('Im logged!');
+  try {
+    res.json(req.session.login);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 exports.logout = async (req, res) => {
