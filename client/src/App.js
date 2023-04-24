@@ -1,38 +1,35 @@
+import { Container } from 'react-bootstrap';
 import { Routes, Route } from 'react-router-dom';
-import MainLayout from './components/layout/MainLayout/MainLayout';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-
-// import routes
-import Home from './components/pages/Home/HomePage';
-import NotFound from './components/pages/NotFound/NotFoundPage';
-import Submit from './components/pages/Submit/SubmitPage';
-import Photo from './components/pages/Photo/PhotoPage';
-import TermsOfUse from './components/pages/TermsOfUse/TermsOfUsePage';
-import PrivacyPolicy from './components/pages/PrivacyPolicy/PrivacyPolicyPage';
-import { loadPhotosRequest } from './redux/photosRedux';
+import Home from './components/pages/Home/Home';
+import Footer from './components/views/Footer/Footer';
+import Header from './components/views/Header/Header';
+import AdPage from './components/pages/AdPage/AdPage';
+import EditAds from './components/features/EditAds/EditAds';
+import Login from './components/pages/Login/Login';
+import Register from './components/pages/Register/Register';
+import Logout from './components/pages/Logout/Logout';
+import AddAds from './components/features/AddAds/AddAds';
+import Search from './components/pages/Search/Search'
 
 const App = () => {
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(loadPhotosRequest())
-  }, [dispatch]);
-
   return (
-    <MainLayout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/photo/:id" element={<Photo />} />
-        <Route path="/terms-of-use" element={<TermsOfUse />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/submit" element={<Submit />} />
-        <Route element={<NotFound />} />
-      </Routes>
-    </MainLayout>
+    <main>
+      <Header />
+      <Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/ads/:id" element={<AddPage />} />
+          <Route path="/addAds" element={<AddAds />} />
+          <Route path="/ads/edit/:id" element={<EditAds />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/search/:searchId" element={<Search />} />      
+        </Routes>
+      </Container>
+      <Footer />
+    </main>
   );
-
-}
+};
 
 export default App;

@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 // import reducers
-import photos from './photosRedux';
+import photos from './userRedux';
 
 // combine reducers
 const rootReducer = combineReducers({
