@@ -1,13 +1,24 @@
-import PromoBox from '../../features/PromoBox/PromoBox';
-import TrendingPhotos from '../../features/TrendingPhotos/TrendingPhotos';
-import PhotosCatalog from '../../features/PhotosCatalog/PhotosCatalog';
+import { API_URL } from '../../../config';
+import { logOut } from '../../../redux/usersRedux';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
-const HomePage = () => (
-  <div>
-    <PromoBox />
-    <TrendingPhotos />
-    <PhotosCatalog />
-  </div>
-);
+const Logout = () => {
+  const dispatch = useDispatch();
 
-export default HomePage;
+
+  useEffect(() => {
+    const options = {
+      method: 'DELETE',
+    };
+
+    fetch(`${API_URL}/logout`, options)
+      .then(() => {
+        dispatch(logOut());
+      })
+  }, [dispatch]);
+
+  return null;
+};
+
+export default Logout;
