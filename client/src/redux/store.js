@@ -6,7 +6,7 @@ import photos from './userRedux';
 
 // combine reducers
 const rootReducer = combineReducers({
-  photos,
+  users: (statePart= [], action)=> statePart,
 });
 
 const store = createStore(

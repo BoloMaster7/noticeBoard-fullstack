@@ -6,7 +6,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { API_URL } from '../../../config';
-import { logIn } from '../../../redux/usersRedux';
+import { logIn } from '../../../redux/userRedux';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
