@@ -9,9 +9,11 @@ import { useSelector } from 'react-redux';
 import { getAdById, updateAds } from '../../../redux/adsRedux';
 import styles from './AdPage.module.scss';
 import { Link } from 'react-router-dom';
-import ModalDelete from '../../features/ModalDelete/ModalDelete';
-import { getUser } from '../../../redux/usersRedux';
+import deleteModal from '../../features/deleteModal/deleteModal';
+import { getUser } from '../../../redux/userRedux';
 import { getUserId } from '../../../redux/userData';
+
+
 const AdPage = () => {
   const navigate = useNavigate();
   const user = useSelector(getUser);
@@ -39,7 +41,7 @@ const AdPage = () => {
     <div>
       <Row className="d-flex justify-content-center mt-5">
         {showModal && (
-          <ModalDelete
+          <deleteModal
             showModal={showModal}
             handleClose={handleClose}
             handleDelete={handleDelete}

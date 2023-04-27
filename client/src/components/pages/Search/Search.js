@@ -1,13 +1,9 @@
-import PromoBox from '../../features/PromoBox/PromoBox';
-import TrendingPhotos from '../../features/TrendingPhotos/TrendingPhotos';
-import PhotosCatalog from '../../features/PhotosCatalog/PhotosCatalog';
+import React from 'react';
 
-const HomePage = () => (
+
+const Search = () => (
   <div>
-    <PromoBox />
-    <TrendingPhotos />
-    <PhotosCatalog />
+   search
   </div>
 );
-
-export default HomePage;
+export default Search;
