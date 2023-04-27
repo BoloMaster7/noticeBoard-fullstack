@@ -1,20 +1,26 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import initialState from './initialState';
+import usersReducer from './userRedux';
+import adsReducer from './adsRedux';
+import userData from './userData';
 
-// import reducers
-import photos from './userRedux';
+const subreducers = {
+  user: usersReducer,
+  ads: adsReducer,
+  userData: userData,
+};
 
-// combine reducers
-const rootReducer = combineReducers({
-  users: (statePart= [], action)=> statePart,
-});
-
+const reducer = combineReducers(subreducers);
 const store = createStore(
-  rootReducer,
+  reducer,
+  initialState,
   compose(
-		applyMiddleware(thunk),
-		window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
-	)
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : (f) => f
+  )
 );
 
 export default store;

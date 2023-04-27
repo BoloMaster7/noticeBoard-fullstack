@@ -9,6 +9,7 @@
     "react": "^16.8.6",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^16.8.6",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^3.8.0",
     "react-images-upload": "^1.2.7",
     "react-redux": "^7.2.5",
@@ -18,7 +19,8 @@
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
     "sass": "^1.35.1",
-    "shards-ui": "^3.0.0"
+    "shards-ui": "^3.0.0",
+    "shortid": "^2.2.16"
   },
   "scripts": {
     "start": "react-scripts start",
