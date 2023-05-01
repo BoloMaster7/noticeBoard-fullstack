@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { getAdById, updateAds } from '../../../redux/adsRedux';
 import styles from './AdPage.module.scss';
 import { Link } from 'react-router-dom';
-import deleteModal from '../../features/deleteModal/deleteModal';
+
 import { getUser } from '../../../redux/userRedux';
 import { getUserId } from '../../../redux/userData';
 
