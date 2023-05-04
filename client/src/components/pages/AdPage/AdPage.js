@@ -10,13 +10,13 @@ import { getAdById, updateAds } from '../../../redux/adsRedux';
 import styles from './AdPage.module.scss';
 import { Link } from 'react-router-dom';
 
-import { getUser } from '../../../redux/userRedux';
+// import { getUser } from '../../../redux/userRedux';
 import { getUserId } from '../../../redux/userData';
 
 
 const AdPage = () => {
   const navigate = useNavigate();
-  const user = useSelector(getUser);
+  // const user = useSelector(getUser);
 
   const adId = useParams();
   const id = adId.id;

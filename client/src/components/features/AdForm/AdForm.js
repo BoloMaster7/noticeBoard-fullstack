@@ -8,7 +8,7 @@ const AdForm = ({ action, actionText, ...props }) => {
   const id = props.id;
   const [price, setPrice] = useState(props.price || '');
   const [title, setTitle] = useState(props.title || '');
-  const [localization, setLocalization] = useState(props.localization || '');
+  const [location, setLocation] = useState(props.localization || '');
   const [description, setDescription] = useState(props.description || '');
   const [date, setDate] = useState(props.date || updateDate);
   const [image, setImage] = useState(props.image || '');
@@ -29,7 +29,7 @@ const AdForm = ({ action, actionText, ...props }) => {
         user,
         date: updateDate,
         description,
-        localization,
+        location,
         id,
         image,
         phoneNumber,
@@ -78,17 +78,17 @@ const AdForm = ({ action, actionText, ...props }) => {
           </small>
         )}
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formLocalization">
+      <Form.Group className="mb-3" controlId="formLocation">
         <Form.Label>Localization</Form.Label>
         <Form.Control
-          {...register('localization', {
+          {...register('location', {
             required: true,
             minLength: 2,
           })}
-          value={localization}
+          value={location}
           type="text"
-          placeholder="Enter localization"
-          onChange={(e) => setLocalization(e.target.value)}
+          placeholder="Enter location"
+          onChange={(e) => setLocation(e.target.value)}
         />
         {errors.localization && (
           <small className="d-block form-text text-danger mt-2">
