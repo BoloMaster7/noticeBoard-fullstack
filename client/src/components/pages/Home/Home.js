@@ -29,7 +29,7 @@ const Home = () => {
 
   const handleUpdate = () => {
     setPending(true);
-    fetch(API_URL + 'api//ads').then((res) => {
+    fetch(API_URL + '/ads').then((res) => {
       if (res.status === 200) {
         return res.json().then((ads) => {
           dispatch(updateAds(ads));
@@ -41,7 +41,7 @@ const Home = () => {
 
   return (
     <>
-      <SearchBar />
+      {/* <SearchBar /> */}
       {pending && <Loader />}
       {!pending && <LineupAds />}
     </>

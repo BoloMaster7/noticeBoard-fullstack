@@ -2,11 +2,13 @@ const fs = require('fs');
 const Ads = require('../models/advert.model');
 const getImageFileType = require('../utils/getImageFileType');
 
+
 exports.getAll = async (req, res) => {
   try {
     res.json(await Ads.find().populate('user'));
   } catch (err) {
     res.status(500).json({ message: err });
+    console.log(err);
   }
 };
 

@@ -9,6 +9,7 @@ const passportSetup = require('./config/passport');
 
 const app = express();
 require('dotenv').config()
+connectToDB()
 
 // init session mechanism
 app.use(session({ secret: 'anything' }));
@@ -37,13 +38,12 @@ app.use(session({
 })
 );
 
+app.use('/api', require('./routes/auth.routes'));
+app.use('/api', require('./routes/user.routes'));
+app.use('/api', require('./routes/ads.routes')); 
+
 app.use(express.static(path.join(__dirname, '/client/build')));
 app.use(express.static(path.join(__dirname, '/public')));
-
-
-app.use('/auth', require('./routes/auth.routes'));
-app.use('/user', require('./routes/user.routes'));
-app.use('/ads', require('./routes/ads.routes')); 
 
 
 app.get('*', (req, res) => {
