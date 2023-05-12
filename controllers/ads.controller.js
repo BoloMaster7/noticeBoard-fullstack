@@ -22,24 +22,24 @@ exports.getById = async (req, res) => {
 
 exports.post = async (req, res) => {
   try {
-    const { title, description, date, price, localization, user } = req.body;
+    const { title, content, date, price, location, user } = req.body;
     const fileType = req.file ? await getImageFileType(req.file) : 'unknown';
 
     if (
       title &&
-      description &&
+      content &&
       date &&
       price &&
-      localization &&
+      location &&
       req.file &&
       ['image/png', 'image/jpeg', 'image/gif'].includes(fileType)
     ) {
       const newAd = new Ads({
         title: title,
-        description: description,
+        content: content,
         date: date,
         price: price,
-        localization: localization,
+        location: location,
         image: req.file.filename,
         user: req.session.id,
       });
@@ -68,7 +68,7 @@ exports.delete = async (req, res) => {
 };
 
 exports.edit = async (req, res) => {
-  const { title, description, date, price, localization } = req.body;
+  const { title, description, date, price, location } = req.body;
 
   try {
     const ad = await Ads.findById(req.params.id);
@@ -78,7 +78,7 @@ exports.edit = async (req, res) => {
       ad.description = description;
       ad.price = price;
       ad.date = date;
-      ad.localization = localization;
+      ad.location = location;
       if (
         req.file &&
         ['image/png', 'image/jpeg', 'image/gif'].includes(fileType)

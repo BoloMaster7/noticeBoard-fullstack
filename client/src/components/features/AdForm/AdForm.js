@@ -9,7 +9,7 @@ const AdForm = ({ action, actionText, ...props }) => {
   const [price, setPrice] = useState(props.price || '');
   const [title, setTitle] = useState(props.title || '');
   const [location, setLocation] = useState(props.localization || '');
-  const [description, setDescription] = useState(props.description || '');
+  const [content, setContent] = useState(props.content || '');
   const [date, setDate] = useState(props.date || updateDate);
   const [image, setImage] = useState(props.image || '');
   const [phoneNumber, setPhone] = useState(props.phoneNumber || '');
@@ -22,13 +22,13 @@ const AdForm = ({ action, actionText, ...props }) => {
   } = useForm();
 
   const handleSubmit = () => {
-    if (description && date) {
+    if (content && date) {
       action({
         price,
         title,
         user,
         date: updateDate,
-        description,
+        content,
         location,
         id,
         image,
@@ -79,7 +79,7 @@ const AdForm = ({ action, actionText, ...props }) => {
         )}
       </Form.Group>
       <Form.Group className="mb-3" controlId="formLocation">
-        <Form.Label>Localization</Form.Label>
+        <Form.Label>Location</Form.Label>
         <Form.Control
           {...register('location', {
             required: true,
@@ -96,21 +96,21 @@ const AdForm = ({ action, actionText, ...props }) => {
           </small>
         )}
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formDescription">
-        <Form.Label>Description</Form.Label>
+      <Form.Group className="mb-3" controlId="formcontnent">
+        <Form.Label>Content</Form.Label>
         <Form.Control
-          {...register('description', {
+          {...register('content', {
             required: true,
             minLength: 20,
             maxLength: 1000,
           })}
-          value={description}
+          value={content}
           as="textarea"
           rows="5"
-          placeholder="Enter description"
-          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Enter content"
+          onChange={(e) => setContent(e.target.value)}
         />
-        {errors.description && (
+        {errors.contnent && (
           <small className="d-block form-text text-danger mt-2">
             This field is required and has to be between 20 to 1000 characters
             long.

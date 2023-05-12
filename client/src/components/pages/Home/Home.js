@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../features/Loader/Loader';
-// import LineupAds from '../../features/LineupAds/LineupAds';
+import LineupAds from '../../features/LineupAds/LineupAds';
 import SearchBar from '../../features/SearchBar/SearchBar';
 import { API_URL } from '../../../config';
 import { updateAds } from '../../../redux/adsRedux';
@@ -43,7 +43,7 @@ const Home = () => {
     <>
       <SearchBar />
       {pending && <Loader />}
-      {/* {!pending && <LineupAds />} */}
+      {!pending && <LineupAds />}
     </>
   );
 };

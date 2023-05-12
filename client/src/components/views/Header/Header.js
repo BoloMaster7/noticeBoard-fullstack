@@ -5,7 +5,7 @@ const Header = () => {
     <nav>
       <div className={styles.nav_wrapper}>
         <NavLink to="/" className={styles.logo}>
-          <h2>Bulletin Board</h2>
+          <h2>Notice Board</h2>
         </NavLink>
         <ul className={styles.nav_list}>
           <li>

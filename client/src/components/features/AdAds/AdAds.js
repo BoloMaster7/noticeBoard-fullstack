@@ -16,10 +16,10 @@ const AdAds = () => {
   const handleSubmit = (ad) => {
     const fd = new FormData();
     fd.append('title', ad.title);
-    fd.append('description', ad.description);
-    fd.append('date', ad.date);
+    fd.append('content', ad.content);
+    fd.append('pubDate', ad.pubDdate);
     fd.append('price', ad.price);
-    fd.append('localization', ad.localization);
+    fd.append('location', ad.location);
     fd.append('phoneNumber', ad.phoneNumber);
     fd.append('image', ad.image);
     fd.append('user', ad.user);
