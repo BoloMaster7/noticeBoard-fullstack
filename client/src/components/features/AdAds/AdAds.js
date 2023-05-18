@@ -32,7 +32,7 @@ const AdAds = () => {
     fetch(API_URL + `/ads`, options).then((res) => {
       if (res.status === 200) {
         dispatch(addAd(ad));
-        dispatch(updateAds())
+        // dispatch(updateAds())
         navigate('/')
       }
     });

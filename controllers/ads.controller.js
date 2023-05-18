@@ -24,13 +24,13 @@ exports.getById = async (req, res) => {
 
 exports.post = async (req, res) => {
   try {
-    const { title, content, date, price, location, user } = req.body;
+    const { title, content, price, location, user } = req.body;
     const fileType = req.file ? await getImageFileType(req.file) : 'unknown';
 
     if (
       title &&
       content &&
-      date &&
+      // date &&
       price &&
       location &&
       req.file &&
@@ -39,7 +39,7 @@ exports.post = async (req, res) => {
       const newAd = new Ads({
         title: title,
         content: content,
-        date: date,
+        date: new Date(),
         price: price,
         location: location,
         image: req.file.filename,
@@ -48,6 +48,7 @@ exports.post = async (req, res) => {
       await newAd.save();
       res.json({ message: 'New Ads' });
     } else {
+      console.log (req.file, fileType)
       if (req.file) {
         fs.unlinkSync(`./client/public/uploads/${req.file.filename}`);
       }

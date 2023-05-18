@@ -27,7 +27,7 @@ const AdForm = ({ action, actionText, ...props }) => {
         price,
         title,
         user,
-        date: updateDate,
+        // date: updateDate,
         content,
         location,
         id,
