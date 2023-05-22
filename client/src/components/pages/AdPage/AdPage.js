@@ -11,7 +11,7 @@ import styles from './AdPage.module.scss';
 import { Link } from 'react-router-dom';
 import { getUser } from '../../../redux/userRedux';
 import { getUserId } from '../../../redux/userData';
-
+import ModalDelete from '../../features/ModalDelete/ModalDelete';
 
 const AdPage = () => {
   const navigate = useNavigate();
@@ -32,22 +32,22 @@ const AdPage = () => {
       method: 'DELETE',
       credentials: 'include',
     };
-    fetch(API_URL + '/api/ads/' + id, options);
+    fetch(API_URL + '/ads/' + id, options);
     updateAds();
     navigate('/');
   };
 
-  console.log(userId,adData.user )
+  // console.log(userId,adData.user )
   return (
     <div>
       <Row className="d-flex justify-content-center mt-5">
         {showModal && (
-          <deleteModal
+          <ModalDelete
             showModal={showModal}
             handleClose={handleClose}
             handleDelete={handleDelete}
           />
-        )}
+        )};
         
         <Col xs="12" lg="5">
           <Card className={styles.card_wrapper}>

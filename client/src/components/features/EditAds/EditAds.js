@@ -16,7 +16,7 @@ const EditAds = () => {
     const fd = new FormData();
     fd.append('title', ad.title);
     fd.append('content', ad.content);
-    fd.append('pubDate', ad.pubDate);
+    // fd.append('pubDate', ad.pubDate);
     fd.append('price', ad.price);
     fd.append('location', ad.location);
     fd.append('phoneNumber', ad.phoneNumber);
@@ -29,7 +29,7 @@ const EditAds = () => {
       credentials: 'include',
     };
 
-    fetch(API_URL + '/api/ads/' + id, options).then((res) => {
+    fetch(API_URL + '/ads/' + id, options).then((res) => {
       if (res.status === 200) {
         setTimeout(() => navigate('/'), 2000);
       }
