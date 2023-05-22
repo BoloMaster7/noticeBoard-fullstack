@@ -36,6 +36,7 @@ exports.post = async (req, res) => {
       req.file &&
       ['image/png', 'image/jpeg', 'image/gif'].includes(fileType)
     ) {
+      console.log(req.session)
       const newAd = new Ads({
         title: title,
         content: content,
@@ -43,7 +44,7 @@ exports.post = async (req, res) => {
         price: price,
         location: location,
         image: req.file.filename,
-        user: req.session.id,
+        user: req.session.login._id,
       });
       await newAd.save();
       res.json({ message: 'New Ads' });

@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import { Modal } from 'react-bootstrap';
 
-const deleteModal = (props) => {
+const DeleteModal = (props) => {
   return (
     <Modal
       show={props.showModal}
@@ -27,4 +27,4 @@ const deleteModal = (props) => {
   );
 };
 
-export default deleteModal;
+export default DeleteModal;

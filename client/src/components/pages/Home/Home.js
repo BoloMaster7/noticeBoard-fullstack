@@ -8,6 +8,8 @@ import { API_URL } from '../../../config';
 import { updateAds } from '../../../redux/adsRedux';
 import { getUser } from '../../../redux/userRedux';
 import { updateData } from '../../../redux/userData';
+import AdAds from '../../features/AdAds/AdAds';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [pending, setPending] = useState(false);
@@ -44,6 +46,9 @@ const Home = () => {
       {/* <SearchBar /> */}
       {pending && <Loader />}
       {!pending && <LineupAds />}
+     
+      <Link to="/adAds">add post</Link>
+  
     </>
   );
 };

@@ -9,14 +9,13 @@ import { useSelector } from 'react-redux';
 import { getAdById, updateAds } from '../../../redux/adsRedux';
 import styles from './AdPage.module.scss';
 import { Link } from 'react-router-dom';
-
-// import { getUser } from '../../../redux/userRedux';
+import { getUser } from '../../../redux/userRedux';
 import { getUserId } from '../../../redux/userData';
 
 
 const AdPage = () => {
   const navigate = useNavigate();
-  // const user = useSelector(getUser);
+  const user = useSelector(getUser);
 
   const adId = useParams();
   const id = adId.id;
@@ -37,6 +36,8 @@ const AdPage = () => {
     updateAds();
     navigate('/');
   };
+
+  console.log(userId,adData.user )
   return (
     <div>
       <Row className="d-flex justify-content-center mt-5">
@@ -47,7 +48,7 @@ const AdPage = () => {
             handleDelete={handleDelete}
           />
         )}
-        ;
+        
         <Col xs="12" lg="5">
           <Card className={styles.card_wrapper}>
             <Card.Img variant="top" src={IMAGES_URL + adData.image} />
@@ -58,7 +59,7 @@ const AdPage = () => {
                 <b>Title: {adData.title}</b>
               </Card.Subtitle>
               <Card.Text className="mb-3">
-                <b>Localization: {adData.localization}</b>
+                <b>Location: {adData.location}</b>
               </Card.Text>
               <Card.Text>{adData.description}</Card.Text>
               <Card.Text>Published: {adData.date}</Card.Text>
@@ -73,7 +74,8 @@ const AdPage = () => {
               </Card.Text>
               <Card.Text>Phone number: {adData.user.phoneNumber}</Card.Text>
             </Card.Body>
-            {userId === adData.user._id && (
+            
+            {userId === adData.user && (
               <Col className={styles.button} xs="12" lg="4">
                 <Link to={'/ads/edit/' + id}>
                   <Button variant="outline-info" className="m-2">
