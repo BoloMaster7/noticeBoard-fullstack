@@ -72,16 +72,16 @@ exports.delete = async (req, res) => {
 };
 
 exports.edit = async (req, res) => {
-  const { title, description, date, price, location } = req.body;
+  const { title, content, date, price, location } = req.body;
 
   try {
     const ad = await Ads.findById(req.params.id);
     const fileType = req.file ? await getImageFileType(req.file) : 'unknown';
     if (ad) {
       ad.title = title;
-      ad.description = description;
+      ad.content = content;
       ad.price = price;
-      ad.date = date;
+      // ad.date = date;
       ad.location = location;
       if (
         req.file &&

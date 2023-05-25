@@ -35,7 +35,7 @@ const AdPage = () => {
     fetch(API_URL + '/ads/' + id, options);
     updateAds();
     navigate('/');
-  };
+  }
 
   // console.log(userId,adData.user )
   return (
@@ -47,7 +47,7 @@ const AdPage = () => {
             handleClose={handleClose}
             handleDelete={handleDelete}
           />
-        )};
+        )}
         
         <Col xs="12" lg="5">
           <Card className={styles.card_wrapper}>
@@ -61,7 +61,7 @@ const AdPage = () => {
               <Card.Text className="mb-3">
                 <b>Location: {adData.location}</b>
               </Card.Text>
-              <Card.Text>{adData.description}</Card.Text>
+              <Card.Text>{adData.content}</Card.Text>
               <Card.Text>Published: {adData.date}</Card.Text>
               <Card.Text>Author: {adData.user.login}</Card.Text>
               <Card.Text>

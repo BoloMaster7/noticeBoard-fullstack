@@ -8,7 +8,6 @@ import { API_URL } from '../../../config';
 import { updateAds } from '../../../redux/adsRedux';
 import { getUser } from '../../../redux/userRedux';
 import { updateData } from '../../../redux/userData';
-import AdAds from '../../features/AdAds/AdAds';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -43,7 +42,7 @@ const Home = () => {
 
   return (
     <>
-      {/* <SearchBar /> */}
+      <SearchBar />
       {pending && <Loader />}
       {!pending && <LineupAds />}
      

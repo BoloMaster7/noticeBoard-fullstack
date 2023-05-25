@@ -8,7 +8,7 @@ const AdForm = ({ action, actionText, ...props }) => {
   const id = props.id;
   const [price, setPrice] = useState(props.price || '');
   const [title, setTitle] = useState(props.title || '');
-  const [location, setLocation] = useState(props.localization || '');
+  const [location, setLocation] = useState(props.location || '');
   const [content, setContent] = useState(props.content || '');
   const [date, setDate] = useState(props.date || updateDate);
   const [image, setImage] = useState(props.image || '');
@@ -35,7 +35,7 @@ const AdForm = ({ action, actionText, ...props }) => {
         phoneNumber,
       });
     }
-  };
+  }
 
   return (
     <Form
