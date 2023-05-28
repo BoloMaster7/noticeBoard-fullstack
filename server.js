@@ -1,33 +1,32 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-// const passport = require('passport');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const connectToDB = require('./db');
-const passportSetup = require('./config/passport');
+require('dotenv').config();
 
 const app = express();
-require('dotenv').config()
 connectToDB()
 
-// init session mechanism
+// // init session mechanism
 app.use(session({ secret: 'anything' }));
-
-// init passport
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 // standard middleware
 if (process.env.NODE_ENV !== 'production') {
+  console.log('asdsadsadsadas')
   app.use(
     cors({
       origin: ['http://localhost:3000'],
       credentials: true,
     })
   );
+} else {
+  app.use(cors());
 }
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
