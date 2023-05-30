@@ -13,19 +13,19 @@ connectToDB()
 app.use(session({ secret: 'anything' }));
 
 // standard middleware
-if (process.env.NODE_ENV !== 'production') {
-  console.log('asdsadsadsadas')
-  app.use(
-    cors({
-      origin: ['http://localhost:3000'],
-      credentials: true,
-    })
-  );
-} else {
-  app.use(cors());
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   console.log('asdsadsadsadas')
+//   app.use(
+//     cors({
+//       origin: ['http://localhost:3000'],
+//       credentials: true,
+//     })
+//   );
+// } else {
+//   app.use(cors());
+// }
 
-// app.use(cors());
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
